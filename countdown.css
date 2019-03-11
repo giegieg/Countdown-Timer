@@ -42,6 +42,16 @@ main {
 font-size: 2rem;
 }
 
+.bounceEffect {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+50% {
+  transform: translateY(0.6vw);
+}
+}
+
 @media only screen and (max-width: 600px) {
   main {
     grid-template-columns: 5fr 1fr 5fr 1fr 5fr 1fr 5fr;

@@ -14,10 +14,10 @@ function getTimeDiff(start, end) {
   const hour = Math.floor(min / 60);
   const r_day = Math.floor(hour / 24);
 
-  let r_hour = hour - (r_day * 24);
-  let r_min = min - (hour * 60);
-  let r_sec = sec - (min * 60);
-
+  const r_hour = hour - (r_day * 24);
+  const r_min = min - (hour * 60);
+  const r_sec = sec - (min * 60);
+  
   return {
     rDay: r_day,
     rHour: r_hour,
@@ -37,6 +37,35 @@ const counter = setInterval(function () {
   minEl.textContent = getTimeDiffObj.rMin;
   secEl.textContent = getTimeDiffObj.rSec;
 
+  const audio = new Audio('res/clocktick.m4a');
+  audio.play();
+
+  //animation effect - seconds
+  secEl.classList.add("bounceEffect");
+  
+  //animation effect - minutes
+  if(getTimeDiffObj.rSec===00) {
+    minEl.classList.add("bounceEffect");
+  }
+  else {
+    minEl.classList.remove("bounceEffect");
+  }
+  //animation effect - hours
+  if(getTimeDiffObj.rMin===00 && getTimeDiffObj.rSec===00) {
+    hourEl.classList.add("bounceEffect");
+  }
+  else {
+    hourEl.classList.remove("bounceEffect");
+  }
+  //animation effect - days
+  if(getTimeDiffObj.rHour===00 && getTimeDiffObj.rSec===00) {
+    dayEl.classList.add("bounceEffect");
+  }
+  else {
+    dayEl.classList.remove("bounceEffect");
+  }
+
+  //stopping the countdown
   if (getTimeDiffObj.rDay === 0 && getTimeDiffObj.rHour === 0 && getTimeDiffObj.rMin === 0 && getTimeDiffObj.rSec === 0) {
     clearInterval(counter);
   }
